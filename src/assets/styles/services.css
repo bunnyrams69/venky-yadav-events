@@ -71,6 +71,24 @@
   justify-content: flex-start;
 }
 
+/* Mobile horizontal rail container styles */
+.services-chips-mobile-rail {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-behavior: smooth;
+  width: 100%;
+  gap: 10px;
+  padding: 12px 10px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Hide Firefox scrollbar */
+}
+
+.services-chips-mobile-rail::-webkit-scrollbar {
+  display: none; /* Hide Chrome/Safari scrollbar */
+}
+
 /* Interactive Chips */
 .services-chip-btn {
   display: flex;
@@ -264,9 +282,10 @@
   }
 
   .services-chips-viewport {
-    height: 120px;
+    height: auto;
+    width: 100%;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .services-chip-btn {

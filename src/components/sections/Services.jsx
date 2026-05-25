@@ -84,6 +84,16 @@ const wrap = (min, max, v) => {
 export default function Services() {
   const [step, setStep] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isMobileLayout, setIsMobileLayout] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileLayout(window.innerWidth <= 1024);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const currentIndex =
     ((step % SERVICES_DATA.length) + SERVICES_DATA.length) % SERVICES_DATA.length;
@@ -130,60 +140,87 @@ export default function Services() {
       <div className="services-carousel-box">
         {/* Left Side Chips Scrolling Panel */}
         <div className="services-chips-panel">
-          <div className="services-panel-fade-top" />
-          <div className="services-panel-fade-bottom" />
+          {!isMobileLayout && <div className="services-panel-fade-top" />}
+          {!isMobileLayout && <div className="services-panel-fade-bottom" />}
           
           <div className="services-chips-viewport">
-            {SERVICES_DATA.map((feature, index) => {
-              const isActive = index === currentIndex;
-              const distance = index - currentIndex;
-              const wrappedDistance = wrap(
-                -(SERVICES_DATA.length / 2),
-                SERVICES_DATA.length / 2,
-                distance
-              );
+            {isMobileLayout ? (
+              // MOBILE HORIZONTAL RAIL LAYOUT
+              <div className="services-chips-mobile-rail">
+                {SERVICES_DATA.map((feature, index) => {
+                  const isActive = index === currentIndex;
+                  const Icon = feature.icon;
+                  return (
+                    <button
+                      key={feature.id}
+                      onClick={() => handleChipClick(index)}
+                      className={`services-chip-btn ${isActive ? "active" : ""}`}
+                      style={{ width: "auto", flexShrink: 0 }}
+                    >
+                      <div className="services-chip-icon">
+                        <Icon size={14} />
+                      </div>
+                      <span className="services-chip-label" style={{ fontSize: "10px" }}>
+                        {feature.label.split(" ")[0]} {/* Shorten for mobile layout fit */}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            ) : (
+              // DESKTOP VERTICAL WHEEL LAYOUT
+              SERVICES_DATA.map((feature, index) => {
+                const isActive = index === currentIndex;
+                const distance = index - currentIndex;
+                const wrappedDistance = wrap(
+                  -(SERVICES_DATA.length / 2),
+                  SERVICES_DATA.length / 2,
+                  distance
+                );
 
-              const Icon = feature.icon;
+                const Icon = feature.icon;
 
-              return (
-                <motion.div
-                  key={feature.id}
-                  style={{
-                    height: ITEM_HEIGHT,
-                    width: "100%",
-                    position: "absolute",
-                    left: 0,
-                  }}
-                  animate={{
-                    y: wrappedDistance * ITEM_HEIGHT,
-                    opacity: 1 - Math.abs(wrappedDistance) * 0.28,
-                  }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 90,
-                    damping: 22,
-                    mass: 1,
-                  }}
-                  className="flex items-center justify-start lg:justify-center"
-                >
-                  <button
-                    onClick={() => handleChipClick(index)}
-                    onMouseEnter={() => setIsPaused(true)}
-                    onMouseLeave={() => setIsPaused(false)}
-                    className={`services-chip-btn ${isActive ? "active" : ""}`}
+                return (
+                  <motion.div
+                    key={feature.id}
+                    style={{
+                      height: ITEM_HEIGHT,
+                      width: "100%",
+                      position: "absolute",
+                      left: 0,
+                    }}
+                    animate={{
+                      y: wrappedDistance * ITEM_HEIGHT,
+                      opacity: 1 - Math.abs(wrappedDistance) * 0.28,
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 90,
+                      damping: 22,
+                      mass: 1,
+                    }}
+                    className="flex items-center justify-start lg:justify-center"
                   >
-                    <div className="services-chip-icon">
-                      <Icon size={16} />
-                    </div>
-                    <span className="services-chip-label">
-                      {feature.label}
-                    </span>
-                  </button>
-                </motion.div>
-              );
-            })}
+                    <button
+                      onClick={() => handleChipClick(index)}
+                      onMouseEnter={() => setIsPaused(true)}
+                      onMouseLeave={() => setIsPaused(false)}
+                      className={`services-chip-btn ${isActive ? "active" : ""}`}
+                    >
+                      <div className="services-chip-icon">
+                        <Icon size={16} />
+                      </div>
+                      <span className="services-chip-label">
+                        {feature.label}
+                      </span>
+                    </button>
+                  </motion.div>
+                );
+              })
+            )}
           </div>
         </div>
+
 
         {/* Right Side Stacked Parallax Previews */}
         <div className="services-cards-panel">
