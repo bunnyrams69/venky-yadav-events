@@ -1,0 +1,85 @@
+/* ════════════════════════════════════════════════
+   VENKY YADAV EVENTS — GLOBAL STYLES
+   ════════════════════════════════════════════════ */
+
+/* RESET */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  --bg-dark: #080810;
+  --gold-primary: #D4AF37;
+  --gold-hover: #F0C040;
+  --gold-rose: #C9845A;
+  --text-main: #F5EFE0;
+  --text-muted: rgba(245, 239, 224, 0.5);
+
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(212, 175, 55, 0.25);
+  --glass-border-hover: rgba(212, 175, 55, 0.7);
+  --glass-glow: 0 0 40px rgba(212, 175, 55, 0.15);
+
+  --font-display: 'Cormorant Garamond', serif;
+  --font-ui: 'Inter', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+}
+
+body {
+  font-family: var(--font-ui);
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-family: var(--font-ui);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* Selection */
+::selection {
+  background: var(--gold-primary);
+  color: var(--bg-dark);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gold-primary);
+  border-radius: 3px;
+}
