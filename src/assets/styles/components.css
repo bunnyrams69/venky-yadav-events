@@ -223,6 +223,55 @@ select.form-input option {
   100% { transform: scale(1); opacity: 0; }
 }
 
+/* ── WHATSAPP BUTTON ── */
+.whatsapp-button {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  z-index: 9000;
+  text-decoration: none;
+}
+
+.whatsapp-pulse-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid #25D366;
+  animation: whatsapp-pulse 2s infinite;
+  pointer-events: none;
+}
+
+/* Smoothly hide WhatsApp floating CTA when user is actively focusing on any input or textarea on the page */
+body:has(input:focus, textarea:focus, select:focus) .whatsapp-button {
+  opacity: 0 !important;
+  transform: scale(0.7) !important;
+  pointer-events: none !important;
+}
+
+@media (max-width: 768px) {
+  .whatsapp-button {
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+  }
+  .whatsapp-button img {
+    width: 24px !important;
+    height: 24px !important;
+  }
+}
+
 /* ── LIGHTBOX ── */
 .lightbox-overlay {
   position: fixed;

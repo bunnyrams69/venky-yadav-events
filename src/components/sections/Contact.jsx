@@ -48,15 +48,14 @@ export default function Contact() {
               initial={{ opacity: 1 }}
               exit={{ opacity: 0, y: -20 }}
               onSubmit={handleSubmit}
-              className="glass-card"
-              style={{ padding: '48px 40px' }}
+              className="glass-card contact-form"
               data-netlify="true"
               name="inquiry"
             >
               <input type="hidden" name="form-name" value="inquiry" />
 
               {/* Row 1: Name + Phone */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
+              <div className="form-grid-2">
                 <div className="form-group">
                   <label className="form-label" htmlFor="contact-name">YOUR NAME</label>
                   <input
@@ -86,7 +85,7 @@ export default function Contact() {
               </div>
 
               {/* Row 2: Email + Event Type */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
+              <div className="form-grid-2">
                 <div className="form-group">
                   <label className="form-label" htmlFor="contact-email">EMAIL</label>
                   <input
@@ -124,7 +123,7 @@ export default function Contact() {
               </div>
 
               {/* Row 3: Date + Guests */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
+              <div className="form-grid-2">
                 <div className="form-group">
                   <label className="form-label" htmlFor="contact-date">EVENT DATE</label>
                   <input
@@ -195,12 +194,27 @@ export default function Contact() {
               </button>
 
               <style>{`
+                .contact-form {
+                  padding: 48px 40px;
+                }
+                .form-grid-2 {
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 20px;
+                  margin-bottom: 20px;
+                }
                 @keyframes spin {
                   from { transform: rotate(0deg); }
                   to { transform: rotate(360deg); }
                 }
                 @media (max-width: 600px) {
-                  .form-grid-2 { grid-template-columns: 1fr !important; }
+                  .contact-form {
+                    padding: 28px 20px !important;
+                  }
+                  .form-grid-2 {
+                    grid-template-columns: 1fr !important;
+                    gap: 16px;
+                  }
                 }
               `}</style>
             </motion.form>
