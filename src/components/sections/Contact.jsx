@@ -207,7 +207,7 @@ export default function Contact() {
                   from { transform: rotate(0deg); }
                   to { transform: rotate(360deg); }
                 }
-                @media (max-width: 600px) {
+                @media (max-width: 768px) {
                   .contact-form {
                     padding: 28px 20px !important;
                   }
@@ -223,9 +223,8 @@ export default function Contact() {
               key="success"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="glass-card"
+              className="glass-card contact-form"
               style={{
-                padding: '64px 48px',
                 textAlign: 'center',
                 display: 'flex',
                 flexDirection: 'column',
